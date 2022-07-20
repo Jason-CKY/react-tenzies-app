@@ -1,0 +1,51 @@
+.Tenzies{
+    display: flex;
+    flex-direction: column;
+}
+
+.Tenzies h1 {
+    color: #2B283A;
+    font-size: 50px;
+    align-self: center;
+    position: relative;
+    margin-top: -160px;
+    font-family: 'Karla';
+}
+
+.Tenzies p {
+    font-family: 'Inter';
+    color: #4A4E74;
+    font-size: 23px;
+    width: 50%;
+    align-self: center;
+    position: relative;
+    margin-top: -25px;
+}
+
+.Tenzies--dice {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 150px;
+    width: 50%;
+    align-self: center;
+
+}
+
+.Tenzies button {
+    background-color: #5035FF;
+    box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+    border-radius: 3.81277px;
+    width: 5vw;
+    height: 5vh;
+    align-self: center;
+    margin-top: 20px;
+    color: #FFFFFF;
+    font-family: 'Karla';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+}
+

@@ -1,0 +1,12 @@
+.dice{
+    border-radius: 5px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Karla';
+    color: #2B283A;
+    line-height: 25px;
+    font-size: 21px;
+    font-weight: 700;
+}
