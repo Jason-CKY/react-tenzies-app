@@ -1,6 +1,7 @@
 .Tenzies{
     display: flex;
     flex-direction: column;
+    height: 80%;
 }
 
 .Tenzies h1 {
@@ -8,7 +9,6 @@
     font-size: 50px;
     align-self: center;
     position: relative;
-    margin-top: -160px;
     font-family: 'Karla';
 }
 
@@ -16,10 +16,9 @@
     font-family: 'Inter';
     color: #4A4E74;
     font-size: 23px;
-    width: 50%;
+    width: 60%;
     align-self: center;
     position: relative;
-    margin-top: -25px;
 }
 
 .Tenzies--dice {
@@ -39,6 +38,7 @@
     box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
     border-radius: 3.81277px;
     width: 5vw;
+    /* width:fit-content; */
     height: 5vh;
     align-self: center;
     margin-top: 20px;
