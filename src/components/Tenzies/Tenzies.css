@@ -50,3 +50,13 @@
     border-radius: 10px;
 }
 
+.Tenzies footer {
+    font-family: 'Inter';
+    color: #4A4E74;
+    font-size: 23px;
+    width: 60%;
+    align-self: center;
+    position: relative;
+    margin-top: 40px;    
+}
+

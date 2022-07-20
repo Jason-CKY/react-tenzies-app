@@ -21,9 +21,16 @@ export default function Tenzies(){
         return dices
     }
 
+
+    const [bestRecord, setBestRecord] = React.useState(JSON.parse(localStorage.getItem("bestRecord")) || {
+        numRolls: null
+    })
     const [Dices, setDices] = React.useState(initializeDice())
-    const [winGame, setWinGame] = React.useState(false)
-    
+    const [gameState, setGameState] = React.useState({
+        win: false,
+        numRolls: null
+    })
+
     const diceElements = Dices.map((Die) => (
         <Dice 
             key={Die.id}
@@ -31,7 +38,7 @@ export default function Tenzies(){
             number={Die.number}
             selected={Die.selected}
             handleClick={selectDie}
-            winGame={winGame}
+            winGame={gameState.win}
         />
     ))
     
@@ -43,29 +50,41 @@ export default function Tenzies(){
             }
         }
         if (winCondition){
-            setWinGame(true)
+            setGameState(prevGameState => ({...prevGameState, win: true}))
         }
     }, [Dices])
 
+    React.useEffect(()=>{
+        if (gameState.win && (!bestRecord.numRolls || gameState.numRolls < bestRecord.numRolls)){
+            setBestRecord(oldBestRecord => ({...oldBestRecord, numRolls: gameState.numRolls}))
+            localStorage.setItem("bestRecord", JSON.stringify({...bestRecord, numRolls: gameState.numRolls}))
+        }        
+    }, [gameState, bestRecord])
+
     function rollUnlockedDice(){
         setDices(oldDices => oldDices.map(oldDie => oldDie.selected ? oldDie : {...oldDie, number: rollDie()}))
+        setGameState(oldGameState => ({...oldGameState, numRolls: oldGameState.numRolls + 1}))
     }
 
     function selectDie(dieId){
-        setDices(oldDices => oldDices.map(oldDie => (dieId === oldDie.id && !winGame) ? {...oldDie, selected: !oldDie.selected} : oldDie))
+        setDices(oldDices => oldDices.map(oldDie => (dieId === oldDie.id && !gameState.win) ? {...oldDie, selected: !oldDie.selected} : oldDie))
     }
 
     function resetGame(){
         setDices(initializeDice())
-        setWinGame(false)
+        setGameState({
+            win: false,
+            numRolls: null
+        })
     }
 
     const buttonStyles = {
-        width: winGame ? "fit-content" : "5vw"
+        width: gameState.win ? "fit-content" : "5vw"
     }
+
     return (
         <div className="Tenzies">
-            {winGame && <Confetti />}
+            {gameState.win && <Confetti />}
             <h1>Tenzies</h1>
             <p>Roll until all dice are the same. Click each dice to freeze it at its current value between rolls.</p>
             <div className="Tenzies--dice">
@@ -73,11 +92,12 @@ export default function Tenzies(){
             </div>
             <button
                 style={buttonStyles} 
-                onClick={winGame ? resetGame : rollUnlockedDice} 
+                onClick={gameState.win ? resetGame : rollUnlockedDice} 
                 className="Tenzies--button"
             >
-            {winGame ? "Play Again!" : "Roll"}
+            {gameState.win ? "Play Again!" : "Roll"}
             </button>
+            <footer>{ bestRecord.numRolls ? `Best record run: ${bestRecord.numRolls} rolls` : `Best record run: `}</footer>
         </div>
     )
 }
